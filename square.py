@@ -11,9 +11,18 @@ class Square:
         self.init_pos = (random.randint(0,self.window_size[0]), random.randint(0,self.window_size[1]))
         self.rect = pygame.Rect(self.init_pos[0],self.init_pos[1],chromosome[0],chromosome[0])
         self.vel = chromosome[1]
+        self.vel_x = 0
+        self.vel_y = 0
 
-        self.vel_x = self.vel
-        self.vel_y = self.vel
+        if random.random() < 0.5:
+            self.vel_x = self.vel
+        else:
+            self.vel_x =-self.vel_x
+
+        if random.random() < 0.5:
+            self.vel_y = self.vel
+        else:
+            self.vel_y = -self.vel
 
         self.color = COLORS[random.randrange(0,len(COLORS))]
 
