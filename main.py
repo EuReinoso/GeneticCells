@@ -1,4 +1,5 @@
 import pygame,sys
+from square import Square
 
 pygame.init()
 
@@ -11,6 +12,11 @@ WINDOW_SIZE = (640,480)
 window = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("GeneticCells")
 
+chromosome = [10,3]
+square = Square(chromosome,WINDOW_SIZE)
+
+time = pygame.time.Clock()
+fps = 60
 while True:
     window.fill(BLACK)
 
@@ -19,4 +25,8 @@ while True:
             pygame.quit()
             sys.exit()
 
+    square.draw(window)
+    square.update()
+
     pygame.display.update()
+    time.tick(fps)
