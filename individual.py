@@ -1,8 +1,11 @@
-from random import random
+from random import random,randrange
 from square import Square
 
 MAX_SIZE = 50
 MAX_VEL = 10
+
+SIZE_MUTATION = 3
+VEL_MUTATION = 1
 
 class Individual:
     def __init__(self,window_size):
@@ -27,5 +30,16 @@ class Individual:
         sons[1].chromosome = son2
 
         return sons
+    
+    def mutation(self,mutation_rate):
+        for i in range(self.chromosome):
+            if random() < mutation_rate:
+                if i == 0:
+                    self.chromosome[0] += randrange(-SIZE_MUTATION,SIZE_MUTATION,0.1)
+                if i == 1:
+                    self.chromosome[1] += randrange(-VEL_MUTATION,VEL_MUTATION,0.1)
+        
+        return self
+
 
     
