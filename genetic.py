@@ -1,4 +1,5 @@
 from individual import Individual
+from random import random()
 
 class Genetic:
     def __init__(self,population_size):
@@ -22,3 +23,14 @@ class Genetic:
         for individual in self.population:
             grade += individual.grade
         return grade
+    
+    def father_select(self,pop_assessment):
+        father = -1
+        valor = random() * pop_assessment
+        total = 0
+        i = 0
+        while i < len(self.population) and total < valor:
+            father += 1
+            total += self.population[i].grade
+            i += 1
+        return father
