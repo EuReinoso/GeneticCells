@@ -10,5 +10,7 @@ class Food:
         self.rect = pygame.Rect(randint(0,window_size[0] - self.size),
                                 randint(0,window_size[1]- self.size)
                                 ,self.size,self.size)
-        
+    
+    def draw(self,window):
+        pygame.draw.rect(window,self.color,self.rect,0,10)
     
