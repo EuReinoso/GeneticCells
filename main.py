@@ -16,6 +16,8 @@ POPULATION_SIZE = 50
 
 FOOD_QUANT = 200
 
+MUTATION_RATE = 0.05
+
 window = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("GeneticCells")
 
@@ -61,6 +63,18 @@ while True:
     draw_population()
 
     food_collide()
+
+    new_population = []
+    grade = genetic.population_assessment()
+    for individual in range(0,genetic.population_size,2):
+        father1 = genetic.father_select(grade)
+        father2 = genetic.father_select(grade)
+
+        sons = genetic.population[father1].crossover(genetic.population[father2])
+        new_population.append(sons[0].mutation(MUTATION_RATE))
+        new_population.append(sons[1].mutation(MUTATION_RATE))
+        
+    genetic.population = list(new_population)
 
     pygame.display.update()
     time.tick(fps)
