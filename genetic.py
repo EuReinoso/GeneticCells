@@ -1,5 +1,5 @@
 from individual import Individual
-from random import random()
+from random import random
 
 class Genetic:
     def __init__(self,population_size):

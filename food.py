@@ -1,6 +1,9 @@
 from random import randint
+import pygame
 
-COLOR = (255,0,0)
+pygame.init()
+
+COLOR = (200,0,0)
 
 class Food:
     def __init__(self,window_size):

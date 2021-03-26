@@ -1,4 +1,4 @@
-from random import random,randrange
+from random import random,uniform
 from square import Square
 
 MAX_SIZE = 50
@@ -34,12 +34,12 @@ class Individual:
         return sons
     
     def mutation(self,mutation_rate):
-        for i in range(self.chromosome):
+        for i in range(len(self.chromosome)):
             if random() < mutation_rate:
                 if i == 0:
-                    self.chromosome[0] += randrange(-SIZE_MUTATION,SIZE_MUTATION,0.1)
+                    self.chromosome[0] += uniform(-SIZE_MUTATION,SIZE_MUTATION)
                 if i == 1:
-                    self.chromosome[1] += randrange(-VEL_MUTATION,VEL_MUTATION,0.1)
+                    self.chromosome[1] += uniform(-VEL_MUTATION,VEL_MUTATION)
         
         return self
 
