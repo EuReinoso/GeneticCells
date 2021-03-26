@@ -14,10 +14,10 @@ class Genetic:
             self.population.append(Individual(window_size))
         self.best_solution = self.population[0] #temp
 
-    def best_individual(self,individual):
-        if individual.grade > self.best_solution.grade:
-            self.best_solution = individual
-
+    def best_individual(self):
+        for individual in self.population:
+            if individual.grade > self.best_solution.grade:
+                self.best_solution = individual
     def population_assessment(self,):
         grade = 0
         for individual in self.population:
