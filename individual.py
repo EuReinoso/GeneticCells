@@ -2,7 +2,7 @@ from random import random,randrange
 from square import Square
 
 MAX_SIZE = 50
-MAX_VEL = 10
+MAX_VEL = 5
 
 SIZE_MUTATION = 3
 VEL_MUTATION = 1
@@ -16,6 +16,8 @@ class Individual:
         self.chromosome.append(random() * MAX_VEL)
 
         self.square = Square(self.chromosome,window_size)
+
+        self.grade = 0
 
     def crossover(self,other):
         cut = round(random() * len(self.chromosome))

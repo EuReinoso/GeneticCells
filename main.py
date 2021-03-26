@@ -44,6 +44,7 @@ def food_collide():
         for food in food_list:
             if individual.square.rect.colliderect(food.rect):
                 food_list.remove(food)
+                individual.grade += 1
 
 
 food_init()
