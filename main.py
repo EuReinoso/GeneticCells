@@ -1,4 +1,4 @@
-import pygame,sys
+import pygame,sys,os
 from square import Square
 from individual import Individual
 from genetic import Genetic
@@ -12,7 +12,7 @@ RED = (255,0,0)
 
 WINDOW_SIZE = (640,480)
 
-POPULATION_SIZE = 50
+POPULATION_SIZE = 15
 
 FOOD_QUANT = 200
 
@@ -51,7 +51,11 @@ def food_collide():
 
 food_init()
 
+ticks = 0
+
+
 while True:
+    ticks += 1
     window.fill(BLACK)
 
     for event in pygame.event.get():
@@ -64,17 +68,29 @@ while True:
 
     food_collide()
 
-    new_population = []
-    grade = genetic.population_assessment()
-    for individual in range(0,genetic.population_size,2):
-        father1 = genetic.father_select(grade)
-        father2 = genetic.father_select(grade)
+    if ticks >= 180:
+        ticks = 0
 
-        sons = genetic.population[father1].crossover(genetic.population[father2])
-        new_population.append(sons[0].mutation(MUTATION_RATE))
-        new_population.append(sons[1].mutation(MUTATION_RATE))
+        genetic.population_order()
+        genetic.best_individual(genetic.population[0])
+        print(genetic.best_solution.chromosome,genetic.best_solution.grade)
+
+        new_population = []
+        grade = genetic.population_assessment()
+
+        for individual in range(0,genetic.population_size,2):
+            father1 = genetic.father_select(grade)
+            father2 = genetic.father_select(grade)
+
+            sons = genetic.population[father1].crossover(genetic.population[father2])
+            new_population.append(sons[0].mutation(MUTATION_RATE))
+            new_population.append(sons[1].mutation(MUTATION_RATE))
+            
         
-    genetic.population = list(new_population)
+        food_init()
+        genetic.generation += 1
+        genetic.population = list(new_population)
+        
 
     pygame.display.update()
     time.tick(fps)

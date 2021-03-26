@@ -7,6 +7,7 @@ class Genetic:
         self.population = []
         self.best_solution = 0 
         self.grade = 0
+        self.generation = 0
         
 
     def population_init(self,window_size):
@@ -14,10 +15,14 @@ class Genetic:
             self.population.append(Individual(window_size))
         self.best_solution = self.population[0] #temp
 
-    def best_individual(self):
-        for individual in self.population:
-            if individual.grade > self.best_solution.grade:
-                self.best_solution = individual
+    def population_order(self):
+        self.population = sorted(self.population,
+                                key= lambda population:population.grade,
+                                reverse = True)
+    
+    def best_individual(self,individual):
+        self.best_solution = individual
+
     def population_assessment(self,):
         grade = 0
         for individual in self.population:

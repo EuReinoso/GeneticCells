@@ -4,8 +4,8 @@ from square import Square
 MAX_SIZE = 50
 MAX_VEL = 5
 
-SIZE_MUTATION = 3
-VEL_MUTATION = 1
+SIZE_MUTATION = 15
+VEL_MUTATION = 5
 
 class Individual:
     def __init__(self,window_size):
