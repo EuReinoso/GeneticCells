@@ -14,7 +14,7 @@ WINDOW_SIZE = (640,480)
 
 POPULATION_SIZE = 50
 
-FOOD_QUANT = 50
+FOOD_QUANT = 200
 
 window = pygame.display.set_mode(WINDOW_SIZE)
 pygame.display.set_caption("GeneticCells")
@@ -39,6 +39,13 @@ def draw_population():
         individual.square.draw(window)
         individual.square.update()
 
+def food_collide():
+    for individual in genetic.population:
+        for food in food_list:
+            if individual.square.rect.colliderect(food.rect):
+                food_list.remove(food)
+
+
 food_init()
 
 while True:
@@ -51,6 +58,8 @@ while True:
     
     draw_food()
     draw_population()
+
+    food_collide()
 
     pygame.display.update()
     time.tick(fps)
