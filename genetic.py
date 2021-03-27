@@ -1,6 +1,8 @@
 from individual import Individual
 from random import random
 
+STARVE = 5
+
 class Genetic:
     def __init__(self,population_size):
         self.population_size = population_size
@@ -39,3 +41,11 @@ class Genetic:
             total += self.population[i].grade
             i += 1
         return father
+
+    def starve_kill(self):
+        for i in range(len(self.population)):
+            if self.population[i].grade < STARVE:
+                self.population.remove(self.population[i])
+
+
+    
