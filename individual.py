@@ -21,14 +21,19 @@ class Individual:
 
         self.grade = 0
 
-    def crossover(self,other):
+    def crossover(self,other,quant=2):
         cut = round(random() * len(self.chromosome))
 
-        son1 = other.chromosome[0:cut] + self.chromosome[cut::]
-        son2 = self.chromosome[0:cut] + other.chromosome[cut::]
+        if quant == 2:
+            son1 = other.chromosome[0:cut] + self.chromosome[cut::]
+            son2 = self.chromosome[0:cut] + other.chromosome[cut::]
 
-        sons = [Individual(self.window_size,chromosome=son1),
-                Individual(self.window_size,chromosome=son2)]
+            sons = [Individual(self.window_size,chromosome=son1),
+                    Individual(self.window_size,chromosome=son2)]
+        if quant == 1:
+            son1 = other.chromosome[0:cut] + self.chromosome[cut::]
+
+            sons = Individual(self.window_size,chromosome=son1)
         
         # sons[0].square.change_rect(son1)
         # sons[1].square.change_rect(son2)
