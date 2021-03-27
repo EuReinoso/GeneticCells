@@ -12,9 +12,9 @@ RED = (255,0,0)
 
 WINDOW_SIZE = (640,480)
 
-POPULATION_SIZE = 15
+POPULATION_SIZE = 10
 
-FOOD_QUANT = 200
+FOOD_QUANT = 50
 
 MUTATION_RATE = 0.05
 
@@ -73,23 +73,38 @@ while True:
 
         genetic.population_order()
         genetic.best_individual(genetic.population[0])
-        print(genetic.best_solution.chromosome,genetic.best_solution.grade)
+        print(genetic.best_solution.chromosome,genetic.best_solution.grade, len(genetic.population))
 
-        new_population = []
+        genetic.starve_kill()
+
+        #new_population = []
         grade = genetic.population_assessment()
 
-        for individual in range(0,genetic.population_size,2):
+        for individual in range(0,len(genetic.population),1):
+
             father1 = genetic.father_select(grade)
             father2 = genetic.father_select(grade)
 
-            sons = genetic.population[father1].crossover(genetic.population[father2])
-            new_population.append(sons[0].mutation(MUTATION_RATE))
-            new_population.append(sons[1].mutation(MUTATION_RATE))
-            
+            #2sons
+            # sons = genetic.population[father1].crossover(genetic.population[father2])
+            # new_population.append(sons[0].mutation(MUTATION_RATE))
+            # new_population.append(sons[1].mutation(MUTATION_RATE))
+
+            #1son
+            # sons = genetic.population[father1].crossover(genetic.population[father2],quant=1)
+            # genetic.population.append(sons.mutation(MUTATION_RATE))
+
+            #replication
+            son = Individual(WINDOW_SIZE,chromosome=genetic.population[father1].chromosome)
+            genetic.population.append(son.mutation(MUTATION_RATE))
+
+        for individual in genetic.population:
+            individual.grade = 0
         
+
         food_init()
         genetic.generation += 1
-        genetic.population = list(new_population)
+        #genetic.population = list(new_population)
         
 
     pygame.display.update()
