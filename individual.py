@@ -12,7 +12,7 @@ class Individual:
         self.window_size = window_size
         self.chromosome = chromosome
 
-        if chromosome == 0:
+        if self.chromosome == 0:
             self.chromosome = []
             self.chromosome.append(random() * MAX_SIZE)
             self.chromosome.append(random() * MAX_VEL)
@@ -47,6 +47,8 @@ class Individual:
                     self.chromosome[0] += uniform(-SIZE_MUTATION,SIZE_MUTATION)
                 if i == 1:
                     self.chromosome[1] += uniform(-VEL_MUTATION,VEL_MUTATION)
+
+        self.square.change_rect(self.chromosome)
         
         return self
 
