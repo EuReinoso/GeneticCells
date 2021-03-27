@@ -8,13 +8,15 @@ SIZE_MUTATION = 15
 VEL_MUTATION = 5
 
 class Individual:
-    def __init__(self,window_size):
+    def __init__(self,window_size,chromosome=0):
         self.window_size = window_size
-        self.chromosome = []
+        self.chromosome = chromosome
 
-        self.chromosome.append(random() * MAX_SIZE)
-        self.chromosome.append(random() * MAX_VEL)
-
+        if chromosome == 0:
+            self.chromosome = []
+            self.chromosome.append(random() * MAX_SIZE)
+            self.chromosome.append(random() * MAX_VEL)
+        
         self.square = Square(self.chromosome,window_size)
 
         self.grade = 0
@@ -25,11 +27,11 @@ class Individual:
         son1 = other.chromosome[0:cut] + self.chromosome[cut::]
         son2 = self.chromosome[0:cut] + other.chromosome[cut::]
 
-        sons = [Individual(self.window_size),
-                Individual(self.window_size)]
+        sons = [Individual(self.window_size,chromosome=son1),
+                Individual(self.window_size,chromosome=son2)]
         
-        sons[0].chromosome = son1
-        sons[1].chromosome = son2
+        # sons[0].square.change_rect(son1)
+        # sons[1].square.change_rect(son2)
 
         return sons
     
@@ -44,4 +46,4 @@ class Individual:
         return self
 
 
-    
+
