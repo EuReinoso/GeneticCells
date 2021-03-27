@@ -36,3 +36,10 @@ class Square:
             
         if self.rect.y < 0 or self.rect.y > self.window_size[1] - self.rect.height:
             self.vel_y = - self.vel_y
+
+    def change_rect(self,chromosome):
+        self.rect.width = chromosome[0]
+        self.rect.height = chromosome[0]
+
+        self.vel_x = chromosome[1]
+        self.vel_y = chromosome[1]
