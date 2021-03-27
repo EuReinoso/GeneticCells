@@ -43,9 +43,16 @@ class Genetic:
         return father
 
     def starve_kill(self):
-        for individual in self.population:
-            if individual.grade < STARVE:
-                self.population.remove(individual)
-
+        i = 0
+        flag = False
+        while i < len(self.population):
+            if flag:
+                flag = False
+            if self.population[i].grade < STARVE:
+                self.population.pop(i)
+                i = 0
+                flag = True
+            if not flag:
+                i += 1
 
     
