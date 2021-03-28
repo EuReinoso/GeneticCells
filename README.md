@@ -46,3 +46,15 @@ The main idea of this project is to visualize the behavior of a genetic/evolutio
  key: p - Individuals/generaton graph.
  
  <img src= "https://github.com/EuReinoso/GeneticCells/blob/master/assets/individuals.jpg?raw=true" width = "280" height = "220" />
+ 
+ ## Final considerations
+ 
+ ### Try changing the variables:
+ 
+ - POPULATION_SIZE - Defines the size of the initial population.
+ 
+ - FOOD_QUANT - Defines the amount of food for each generation.
+ 
+ - MUTATION_RATE - Defines the chance that an individual will mutate.
+
+Watch the changes and have fun!
