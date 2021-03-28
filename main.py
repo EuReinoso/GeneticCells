@@ -5,6 +5,11 @@ from genetic import Genetic
 from food import Food
 
 pygame.init()
+pygame.font.init()
+
+font = pygame.font.get_default_font()
+font_info = pygame.font.SysFont(font,45) 
+
 
 BLACK = (0,0,0)
 WHITE = (255,255,255)
@@ -23,6 +28,9 @@ pygame.display.set_caption("GeneticCells")
 
 genetic = Genetic(POPULATION_SIZE)
 genetic.population_init(WINDOW_SIZE)
+
+txt_info = str(genetic.generation)
+render_info = font_info.render(txt_info,1,WHITE)
 
 time = pygame.time.Clock()
 fps = 60
@@ -52,8 +60,6 @@ def food_collide():
 food_init()
 
 ticks = 0
-
-
 while True:
     ticks += 1
     window.fill(BLACK)
@@ -67,6 +73,8 @@ while True:
     draw_population()
 
     food_collide()
+
+     
 
     if ticks >= 180:
         ticks = 0
@@ -103,9 +111,13 @@ while True:
         
 
         food_init()
-        genetic.generation += 1
+        genetic.generation += 1 
         #genetic.population = list(new_population)
-        
 
+        txt_info = str(genetic.generation)
+        render_info = font_info.render(txt_info,1,WHITE)
+
+        
+    window.blit(render_info,(10,10))
     pygame.display.update()
     time.tick(fps)
