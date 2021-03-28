@@ -24,3 +24,25 @@ The main idea of this project is to visualize the behavior of a genetic/evolutio
  Here we can see a significant increase in the speed and size of individuals
  
  <img src= "https://github.com/EuReinoso/GeneticCells/blob/master/assets/big.gif?raw=true" width = "480" height = "360" />
+ 
+ ## Graphs
+ 
+ Using the matplotlib library, I created some methods to visualize the population's behavior through graphics.
+ 
+ To open the graphs you can press:
+ 
+ key: s - Avarage sizes/generaton graph.
+ 
+ <img src= "https://github.com/EuReinoso/GeneticCells/blob/master/assets/sizes.jpg?raw=true" width = "280" height = "220" />
+ 
+ key: v - Avarage velocityes/generaton graph.
+ 
+ <img src= "https://github.com/EuReinoso/GeneticCells/blob/master/assets/velocity.jpg?raw=true" width = "280" height = "220" />
+ 
+ key: g - Avarage grades/generaton graph.
+ 
+ <img src= "https://github.com/EuReinoso/GeneticCells/blob/master/assets/grades.jpg" width = "280" height = "220" />
+ 
+ key: p - Individuals/generaton graph.
+ 
+ <img src= "https://github.com/EuReinoso/GeneticCells/blob/master/assets/individuals.jpg?raw=true" width = "280" height = "220" />
