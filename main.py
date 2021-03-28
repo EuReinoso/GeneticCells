@@ -3,6 +3,7 @@ from square import Square
 from individual import Individual
 from genetic import Genetic
 from food import Food
+import matplotlib.pyplot
 
 pygame.init()
 pygame.font.init()
@@ -28,6 +29,12 @@ pygame.display.set_caption("GeneticCells")
 
 genetic = Genetic(POPULATION_SIZE)
 genetic.population_init(WINDOW_SIZE)
+
+generations = []
+sizes = []
+vels = []
+grades = []
+quant_individuals = []
 
 txt_info = str(genetic.generation)
 render_info = font_info.render(txt_info,1,WHITE)
@@ -56,11 +63,20 @@ def food_collide():
                 food_list.remove(food)
                 individual.grade += 1
 
+def graphs_data():
+    avarage_size,avarage_vel,avarage_grade = genetic.avarage()
+    sizes.append(avarage_size)
+    vels.append(avarage_vel)
+    grades.append(avarage_grade)
+    quant_individuals.append(len(genetic.population))
+    generations.append(genetic.generation)
 
 food_init()
-
 ticks = 0
 while True:
+
+    
+
     ticks += 1
     window.fill(BLACK)
 
@@ -68,16 +84,42 @@ while True:
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_s:
+                matplotlib.pyplot.plot(generations,sizes)
+                matplotlib.pyplot.title('Avarage sizes/generations')
+                matplotlib.pyplot.xlabel('generations')
+                matplotlib.pyplot.ylabel('Avarage sizes')
+                matplotlib.pyplot.show()
+            if event.key == pygame.K_v:
+                matplotlib.pyplot.plot(generations,vels)
+                matplotlib.pyplot.title('Avarage velocity/generations')
+                matplotlib.pyplot.xlabel('generations')
+                matplotlib.pyplot.ylabel('Avarage velocity')
+                matplotlib.pyplot.show()
+            if event.key == pygame.K_g:
+                matplotlib.pyplot.plot(generations,grades)
+                matplotlib.pyplot.title('Avarage grades/generations')
+                matplotlib.pyplot.xlabel('generations')
+                matplotlib.pyplot.ylabel('Avarage grade')
+                matplotlib.pyplot.show()
+            if event.key == pygame.K_q:
+                matplotlib.pyplot.plot(generations,quant_individuals)
+                matplotlib.pyplot.title('Avarage population size/generations')
+                matplotlib.pyplot.xlabel('generations')
+                matplotlib.pyplot.ylabel('Avarage population size')
+                matplotlib.pyplot.show()
     
     draw_food()
     draw_population()
-
     food_collide()
-
-     
 
     if ticks >= 180:
         ticks = 0
+        
+        graphs_data()
+        
+        
 
         genetic.population_order()
         genetic.best_individual(genetic.population[0])
@@ -117,7 +159,7 @@ while True:
         txt_info = str(genetic.generation)
         render_info = font_info.render(txt_info,1,WHITE)
 
-        
+    
     window.blit(render_info,(10,10))
     pygame.display.update()
     time.tick(fps)
