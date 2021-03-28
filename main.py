@@ -9,7 +9,8 @@ pygame.init()
 pygame.font.init()
 
 font = pygame.font.get_default_font()
-font_info = pygame.font.SysFont(font,45) 
+font_info = pygame.font.SysFont(font,45)
+font_guide = pygame.font.SysFont(font,22) 
 
 
 BLACK = (0,0,0)
@@ -36,8 +37,10 @@ vels = []
 grades = []
 quant_individuals = []
 
-txt_info = str(genetic.generation)
+txt_info = 'gen: ' + str(genetic.generation)
+txt_guide = 'Graphics keys: Sizes - s | Vel - v | Grades - g | Population - p'
 render_info = font_info.render(txt_info,1,WHITE)
+render_guide = font_guide.render(txt_guide,1,(200,200,200))
 
 time = pygame.time.Clock()
 fps = 60
@@ -78,7 +81,7 @@ while True:
     
 
     ticks += 1
-    window.fill(BLACK)
+    window.fill((20,20,20))
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -103,7 +106,7 @@ while True:
                 matplotlib.pyplot.xlabel('generations')
                 matplotlib.pyplot.ylabel('Avarage grade')
                 matplotlib.pyplot.show()
-            if event.key == pygame.K_q:
+            if event.key == pygame.K_p:
                 matplotlib.pyplot.plot(generations,quant_individuals)
                 matplotlib.pyplot.title('Avarage population size/generations')
                 matplotlib.pyplot.xlabel('generations')
@@ -156,10 +159,11 @@ while True:
         genetic.generation += 1 
         #genetic.population = list(new_population)
 
-        txt_info = str(genetic.generation)
+        txt_info = 'gen: ' + str(genetic.generation)
         render_info = font_info.render(txt_info,1,WHITE)
 
     
     window.blit(render_info,(10,10))
+    window.blit(render_guide,(10,460))
     pygame.display.update()
     time.tick(fps)
