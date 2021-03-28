@@ -9,7 +9,7 @@ class Genetic:
         self.population = []
         self.best_solution = 0 
         self.grade = 0
-        self.generation = 0
+        self.generation = 1
         
 
     def population_init(self,window_size):
@@ -54,5 +54,21 @@ class Genetic:
                 flag = True
             if not flag:
                 i += 1
+
+    def avarage(self):
+        total_size = 0
+        total_vel = 0
+        total_grade = 0
+        
+        for individual in self.population:
+            total_size += round(individual.square.rect.width)
+            total_vel += round(individual.square.vel_x)
+            total_grade += individual.grade
+
+        avarage_size = total_size/len(self.population)
+        avarage_vel = total_vel/len(self.population)
+        avarage_grade = total_grade/len(self.population)
+
+        return avarage_size, avarage_vel, avarage_grade
 
     
