@@ -71,4 +71,24 @@ class Genetic:
 
         return avarage_size, avarage_vel, avarage_grade
 
-    
+    def solve(self, window_size, mutation_rate):
+        self.population_order()
+        self.best_individual(self.population[0])
+        print(self.best_solution.chromosome,self.best_solution.grade, len(self.population))
+
+        self.starve_kill()
+
+        grade = self.population_assessment()
+
+        for individual in range(0,len(self.population),1):
+
+            father = self.father_select(grade)
+
+            #replication
+            son = Individual(window_size, chromosome=self.population[father].chromosome)
+            self.population.append(son.mutation(mutation_rate))
+
+        for individual in self.population:
+            individual.grade = 0
+
+        self.generation += 1 
