@@ -44,8 +44,10 @@ render_guide = font_guide.render(txt_guide,1,(200,200,200))
 
 time = pygame.time.Clock()
 fps = 60
+ticks = 0
 
 food_list = []
+
 def food_init():
     for i in range(FOOD_QUANT):
         food_list.append(Food(WINDOW_SIZE))
@@ -75,10 +77,8 @@ def graphs_data():
     generations.append(genetic.generation)
 
 food_init()
-ticks = 0
-while True:
 
-    
+while True:
 
     ticks += 1
     window.fill((20,20,20))
@@ -121,43 +121,10 @@ while True:
         ticks = 0
         
         graphs_data()
-        
-        
 
-        genetic.population_order()
-        genetic.best_individual(genetic.population[0])
-        print(genetic.best_solution.chromosome,genetic.best_solution.grade, len(genetic.population))
-
-        genetic.starve_kill()
-
-        #new_population = []
-        grade = genetic.population_assessment()
-
-        for individual in range(0,len(genetic.population),1):
-
-            father1 = genetic.father_select(grade)
-            father2 = genetic.father_select(grade)
-
-            #2sons
-            # sons = genetic.population[father1].crossover(genetic.population[father2])
-            # new_population.append(sons[0].mutation(MUTATION_RATE))
-            # new_population.append(sons[1].mutation(MUTATION_RATE))
-
-            #1son
-            # sons = genetic.population[father1].crossover(genetic.population[father2],quant=1)
-            # genetic.population.append(sons.mutation(MUTATION_RATE))
-
-            #replication
-            son = Individual(WINDOW_SIZE,chromosome=genetic.population[father1].chromosome)
-            genetic.population.append(son.mutation(MUTATION_RATE))
-
-        for individual in genetic.population:
-            individual.grade = 0
-        
+        genetic.solve(WINDOW_SIZE,MUTATION_RATE)
 
         food_init()
-        genetic.generation += 1 
-        #genetic.population = list(new_population)
 
         txt_info = 'gen: ' + str(genetic.generation)
         render_info = font_info.render(txt_info,1,WHITE)
