@@ -76,6 +76,13 @@ def graphs_data():
     quant_individuals.append(len(genetic.population))
     generations.append(genetic.generation)
 
+def graph_show(x_list,y_list,title='',x_title='',y_title=''):
+    matplotlib.pyplot.plot(x_list,y_list)
+    matplotlib.pyplot.title(title)
+    matplotlib.pyplot.xlabel(x_title)
+    matplotlib.pyplot.ylabel(y_title)
+    matplotlib.pyplot.show()
+
 food_init()
 
 while True:
@@ -89,30 +96,17 @@ while True:
             sys.exit()
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_s:
-                matplotlib.pyplot.plot(generations,sizes)
-                matplotlib.pyplot.title('Avarage sizes/generations')
-                matplotlib.pyplot.xlabel('generations')
-                matplotlib.pyplot.ylabel('Avarage sizes')
-                matplotlib.pyplot.show()
+                graph_show(generations, sizes, 'Avarage sizes/generations', 'generations', 'Avarage sizes')
+
             if event.key == pygame.K_v:
-                matplotlib.pyplot.plot(generations,vels)
-                matplotlib.pyplot.title('Avarage velocity/generations')
-                matplotlib.pyplot.xlabel('generations')
-                matplotlib.pyplot.ylabel('Avarage velocity')
-                matplotlib.pyplot.show()
+                graph_show(generations, vels, 'Avarage velocity/generations', 'generations', 'Avarage velocity')
+
             if event.key == pygame.K_g:
-                matplotlib.pyplot.plot(generations,grades)
-                matplotlib.pyplot.title('Avarage grades/generations')
-                matplotlib.pyplot.xlabel('generations')
-                matplotlib.pyplot.ylabel('Avarage grade')
-                matplotlib.pyplot.show()
+                graph_show(generations, grades, 'Avarage grades/generations', 'generations', 'Avarage grade')
+
             if event.key == pygame.K_p:
-                matplotlib.pyplot.plot(generations,quant_individuals)
-                matplotlib.pyplot.title('Avarage population size/generations')
-                matplotlib.pyplot.xlabel('generations')
-                matplotlib.pyplot.ylabel('Avarage population size')
-                matplotlib.pyplot.show()
-    
+                graph_show(generations, quant_individuals, 'Individuals/generations', 'generations', 'Individuals')
+                
     draw_food()
     draw_population()
     food_collide()
