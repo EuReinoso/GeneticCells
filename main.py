@@ -3,13 +3,13 @@ from square import Square
 from individual import Individual
 from genetic import Genetic
 from food import Food
-import matplotlib.pyplot
+import matplotlib.pyplot as plt
 
 pygame.init()
 pygame.font.init()
 
 font = pygame.font.get_default_font()
-font_info = pygame.font.SysFont(font,45)
+font_info = pygame.font.SysFont(font,30)
 font_guide = pygame.font.SysFont(font,22) 
 
 
@@ -37,8 +37,8 @@ vels = []
 grades = []
 quant_individuals = []
 
-txt_info = 'gen: ' + str(genetic.generation)
-txt_guide = 'Graphics keys: Sizes - s | Vel - v | Grades - g | Population - p'
+txt_info = 'Generation: ' + str(genetic.generation)
+txt_guide = 'Graphics: press g'
 render_info = font_info.render(txt_info,1,WHITE)
 render_guide = font_guide.render(txt_guide,1,(200,200,200))
 
@@ -76,12 +76,24 @@ def graphs_data():
     quant_individuals.append(len(genetic.population))
     generations.append(genetic.generation)
 
-def graph_show(x_list,y_list,title='',x_title='',y_title=''):
-    matplotlib.pyplot.plot(x_list,y_list)
-    matplotlib.pyplot.title(title)
-    matplotlib.pyplot.xlabel(x_title)
-    matplotlib.pyplot.ylabel(y_title)
-    matplotlib.pyplot.show()
+def show_graphs():
+    plt.figure(1)
+    plt.subplot(2,2,1)
+    plt.plot(generations,sizes)
+    plt.title('Avarage Sizes')
+
+    plt.subplot(2,2,2)
+    plt.plot(generations,vels)
+    plt.title('Avarage Velocity')
+
+    plt.subplot(2,2,3)
+    plt.plot(generations,grades)
+    plt.title('Avarage Grades')
+    
+    plt.subplot(2,2,4)
+    plt.plot(generations,quant_individuals)
+    plt.title('Individuals')
+    plt.show()
 
 food_init()
 
@@ -95,18 +107,9 @@ while True:
             pygame.quit()
             sys.exit()
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_s:
-                graph_show(generations, sizes, 'Avarage sizes/generations', 'generations', 'Avarage sizes')
-
-            if event.key == pygame.K_v:
-                graph_show(generations, vels, 'Avarage velocity/generations', 'generations', 'Avarage velocity')
-
             if event.key == pygame.K_g:
-                graph_show(generations, grades, 'Avarage grades/generations', 'generations', 'Avarage grade')
+                show_graphs()
 
-            if event.key == pygame.K_p:
-                graph_show(generations, quant_individuals, 'Individuals/generations', 'generations', 'Individuals')
-                
     draw_food()
     draw_population()
     food_collide()
@@ -120,7 +123,7 @@ while True:
 
         food_init()
 
-        txt_info = 'gen: ' + str(genetic.generation)
+        txt_info = 'Generation: ' + str(genetic.generation)
         render_info = font_info.render(txt_info,1,WHITE)
 
     
