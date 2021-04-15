@@ -51,10 +51,10 @@ The main idea of this project is to visualize the behavior of a genetic/evolutio
  
  ### Try changing the variables:
  
- - POPULATION_SIZE - Defines the size of the initial population.
+    POPULATION_SIZE - Defines the size of the initial population.
  
- - FOOD_QUANT - Defines the amount of food for each generation.
+    FOOD_QUANT - Defines the amount of food for each generation.
  
- - MUTATION_RATE - Defines the chance that an individual will mutate.
+    MUTATION_RATE - Defines the chance that an individual will mutate.
 
 Watch the changes and have fun!
